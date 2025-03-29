@@ -109,14 +109,25 @@ button:hover {
     padding: 20px;
     border-radius: 10px;
     text-align: center;
-    max-width: 90%;  /* Ensure the popup doesn't overflow on mobile */
+    max-width: 90%; /* Ensure the popup doesn't overflow on mobile */
     overflow-x: auto;
+    max-height: 90%;
+    overflow-y: auto;
 }
 
+.popup-content h2 {
+    margin-bottom: 20px;
+}
+
+/* New table for Hiragana */
 .popup-content table {
     width: 100%;
     margin-top: 20px;
     border-collapse: collapse;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    justify-items: center;
 }
 
 .popup-content table td {
@@ -125,7 +136,20 @@ button:hover {
     border: 1px solid #ddd;
     font-size: 1.5rem;
     font-family: "Arial", sans-serif;
+    line-height: 1.5;
 }
+
+.popup-content table td .hiragana-symbol {
+    font-size: 2.5rem;
+}
+
+.popup-content table td .romaji {
+    font-size: 1.2rem;
+    margin-top: 5px;
+}
+
+/* Button */
+
 
 .popup-content button {
     margin-top: 20px;
