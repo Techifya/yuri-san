@@ -70,7 +70,7 @@ function loadQuestion() {
         choice.setAttribute("data-character", hiraganaCharacter); // Store Hiragana character in data-character
 
         // Add hover event listener to read out the character in Japanese
-        choice.addEventListener('mouseover', readOutCharacter);
+        addCharacterReadEvents();
     });
 }
 
@@ -175,5 +175,36 @@ function endQuiz() {
     // Show the Start Quiz button again (if needed)
     document.getElementById("start-quiz-btn").style.display = 'block'; // Optionally add a restart button
 }
+
+function addCharacterReadEvents() {
+    const choices = document.querySelectorAll(".choice");
+
+    // Add 'mouseover' for desktop (mouse hover)
+    choices.forEach(choice => {
+        choice.addEventListener('mouseover', readOutCharacter);
+    });
+    
+    // Add 'touchstart' and 'touchend' for mobile (touch and hold)
+    choices.forEach(choice => {
+        let touchStartTime = 0;
+        const touchHoldDuration = 500;  // Duration in ms to trigger the "hold" action
+
+        choice.addEventListener('touchstart', (event) => {
+            touchStartTime = Date.now();  // Record the start time of the touch
+            event.preventDefault(); // Prevent the default touch behavior (e.g., copy/paste menu)
+        });
+
+        choice.addEventListener('touchend', (event) => {
+            const touchEndTime = Date.now();
+            const touchDuration = touchEndTime - touchStartTime;
+
+            // If touch was held long enough (500ms or more)
+            if (touchDuration >= touchHoldDuration) {
+                readOutCharacter(event);  // Read out the Hiragana character
+            }
+        });
+    });
+}
+
 
 loadQuestion();
