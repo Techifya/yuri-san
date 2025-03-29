@@ -191,7 +191,6 @@ function addCharacterReadEvents() {
 
         choice.addEventListener('touchstart', (event) => {
             touchStartTime = Date.now();  // Record the start time of the touch
-            event.preventDefault(); // Prevent the default touch behavior (e.g., copy/paste menu)
         });
 
         choice.addEventListener('touchend', (event) => {
