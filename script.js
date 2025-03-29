@@ -187,7 +187,7 @@ function addCharacterReadEvents() {
     // Add 'touchstart' and 'touchend' for mobile (touch and hold)
     choices.forEach(choice => {
         let touchStartTime = 0;
-        const touchHoldDuration = 200;  // Duration in ms to trigger the "hold" action
+        const touchHoldDuration = 500;  // Duration in ms to trigger the "hold" action
 
         choice.addEventListener('touchstart', (event) => {
             touchStartTime = Date.now();  // Record the start time of the touch
