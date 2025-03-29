@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Hiragana</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="question">
+            <p id="question" style="font-size: xx-large;">What is this Hiragana?</p>
+            <div id="hiragana-symbol" class="hiragana-symbol">あ</div>
+        </div>
+
+        <div class="choices">
+            <div class="choice" onclick="checkAnswer(event)" data-answer="a" data-character="あ">a</div>
+            <div class="choice" onclick="checkAnswer(event)" data-answer="i" data-character="い">i</div>
+            <div class="choice" onclick="checkAnswer(event)" data-answer="u" data-character="う">u</div>
+            <div class="choice" onclick="checkAnswer(event)" data-answer="e" data-character="え">e</div>
+        </div>
+        
+
+        <div class="result" id="result"></div>
+
+        <div class="buttons">
+            <button onclick="openPopup()">Hiragana Reference</button>
+            <button onclick="endQuiz()">End Quiz</button>
+        </div>
+
+        <!-- Hiragana Chart Popup -->
+        <div class="popup" id="popup">
+            <div class="popup-content">
+                <h2>Hiragana Chart</h2>
+                <table>
+                    <tr><td>あ</td><td>い</td><td>う</td><td>え</td><td>お</td></tr>
+                    <tr><td>か</td><td>き</td><td>く</td><td>け</td><td>こ</td></tr>
+                    <tr><td>さ</td><td>し</td><td>す</td><td>せ</td><td>そ</td></tr>
+                    <tr><td>た</td><td>ち</td><td>つ</td><td>て</td><td>と</td></tr>
+                    <tr><td>な</td><td>に</td><td>ぬ</td><td>ね</td><td>の</td></tr>
+                    <tr><td>は</td><td>ひ</td><td>ふ</td><td>へ</td><td>ほ</td></tr>
+                    <tr><td>ま</td><td>み</td><td>む</td><td>め</td><td>も</td></tr>
+                    <tr><td>や</td><td>ゆ</td><td>よ</td><td>ら</td><td>り</td></tr>
+                    <tr><td>る</td><td>れ</td><td>ろ</td><td>わ</td><td>を</td></tr>
+                </table>
+                <button onclick="closePopup()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

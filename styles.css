@@ -1,0 +1,129 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 800px;
+}
+
+/* Question and Hiragana Symbol */
+.question {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#hiragana-symbol {
+    font-size: 4rem;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+}
+
+/* Choices Section */
+.choices {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+.choice {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.choice:hover {
+    background-color: #e0e0e0;
+}
+
+/* Result Section */
+.result {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 20px;
+}
+
+/* Buttons */
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Popup Styles */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 500px;
+    overflow-x: auto;
+}
+
+.popup-content table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.popup-content table td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+    font-size: 1.5rem;
+    font-family: "Arial", sans-serif;
+}
+
+.popup-content button {
+    margin-top: 20px;
+    background-color: #f44336;
+}
+
+.popup-content button:hover {
+    background-color: #e53935;
+}
