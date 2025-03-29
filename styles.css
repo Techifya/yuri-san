@@ -8,6 +8,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    padding: 10px; /* Ensure some space on mobile */
 }
 
 .container {
@@ -15,7 +16,7 @@ body {
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 90%;
+    width: 100%;
     max-width: 800px;
 }
 
@@ -36,8 +37,9 @@ body {
 /* Choices Section */
 .choices {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-top: 30px;
+    flex-wrap: wrap;  /* Allow wrapping on smaller screens */
 }
 
 .choice {
@@ -48,6 +50,8 @@ body {
     font-size: 1.5rem;
     cursor: pointer;
     transition: background-color 0.3s;
+    flex: 1 1 45%;  /* Allow two choices per row on mobile */
+    margin: 5px;  /* Add spacing between choices */
 }
 
 .choice:hover {
@@ -66,10 +70,11 @@ body {
     display: flex;
     justify-content: space-between;
     margin-top: 30px;
+    flex-wrap: wrap;  /* Allow buttons to wrap on smaller screens */
 }
 
 button {
-    padding: 10px 20px;
+    padding: 12px 20px;
     font-size: 1.2rem;
     border: none;
     background-color: #4CAF50;
@@ -77,6 +82,9 @@ button {
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s;
+    flex: 1 1 45%; /* Allow buttons to take up 45% of the container */
+    margin: 5px;
+    text-align: center;
 }
 
 button:hover {
@@ -101,7 +109,7 @@ button:hover {
     padding: 20px;
     border-radius: 10px;
     text-align: center;
-    max-width: 500px;
+    max-width: 90%;  /* Ensure the popup doesn't overflow on mobile */
     overflow-x: auto;
 }
 
@@ -122,8 +130,49 @@ button:hover {
 .popup-content button {
     margin-top: 20px;
     background-color: #f44336;
+    width: 100%;  /* Full-width button */
 }
 
 .popup-content button:hover {
     background-color: #e53935;
+}
+
+/* Media Queries for Mobile */
+@media (max-width: 600px) {
+    #hiragana-symbol {
+        font-size: 3rem; /* Reduce font size for smaller screens */
+        padding: 15px;
+    }
+
+    .choice {
+        font-size: 1.2rem; /* Adjust choice font size */
+        padding: 12px 20px; /* Adjust padding for better fit */
+    }
+
+    .buttons {
+        flex-direction: column; /* Stack buttons vertically on mobile */
+    }
+
+    button {
+        font-size: 1.1rem;  /* Slightly smaller button font size */
+        padding: 15px 0;  /* Make buttons taller */
+        margin-bottom: 10px;  /* Add space between buttons */
+    }
+
+    .popup-content {
+        max-width: 95%;  /* Allow popup content to use more width on mobile */
+    }
+}
+
+/* Adjust for very small screens */
+@media (max-width: 400px) {
+    .container {
+        padding: 20px;
+    }
+
+    .choice {
+        font-size: 1.2rem;
+        padding: 10px 20px;
+        margin: 5px;
+    }
 }
