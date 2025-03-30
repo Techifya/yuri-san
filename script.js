@@ -191,18 +191,24 @@ function checkAnswer(event) {
         result.innerText = "Correct!";
         result.classList.remove("text-red-500");
         result.classList.add("text-green-500");  // Change text color to green for correct answer
+
+        setTimeout(() => {
+            result.innerText = ""; // Clear the result message
+            loadQuestion(); // Load the next question
+        }, 500); // Adjust the delay time as needed
     } else {
         quizState.incorrectAnswers++;
         result.innerText = `Uh Uh, Incorrect! Answer is ${correctAnswer}`;
         result.classList.remove("text-green-500");
         result.classList.add("text-red-500");  // Change text color to red for incorrect answer
+
+        setTimeout(() => {
+            result.innerText = ""; // Clear the result message
+            loadQuestion(); // Load the next question
+        }, 2000); // Adjust the delay time as needed
     }
 
     // Hide the result message and load the next question after a short delay
-    setTimeout(() => {
-        result.innerText = ""; // Clear the result message
-        loadQuestion(); // Load the next question
-    }, 2000); // Adjust the delay time as needed
 }
 
 
