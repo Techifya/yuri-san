@@ -18,18 +18,18 @@
             </div>
         </div>
 
-        <div class="choices grid grid-cols-2 gap-4 mb-6">
+        <div class="choices grid grid-cols-2 gap-4 mb-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             <div class="choice p-4 text-xl font-semibold text-center cursor-pointer bg-gray-200 rounded-lg" onclick="checkAnswer(event)" data-answer="a" data-character="あ">あ</div>
             <div class="choice p-4 text-xl font-semibold text-center cursor-pointer bg-gray-200 rounded-lg" onclick="checkAnswer(event)" data-answer="i" data-character="い">い</div>
             <div class="choice p-4 text-xl font-semibold text-center cursor-pointer bg-gray-200 rounded-lg" onclick="checkAnswer(event)" data-answer="u" data-character="う">う</div>
             <div class="choice p-4 text-xl font-semibold text-center cursor-pointer bg-gray-200 rounded-lg" onclick="checkAnswer(event)" data-answer="e" data-character="え">え</div>
             <div class="choice p-4 text-xl font-semibold text-center cursor-pointer bg-gray-200 rounded-lg col-span-2 md:col-span-1" onclick="checkAnswer(event)" data-answer="o" data-character="お">お</div>
-        </div>        
+        </div>
 
         <div id="result" class="text-center text-xl mb-4"></div>
 
-        <div class="buttons flex justify-between flex-wrap gap-4">
-            <select id="level-selector" onchange="loadLevel()" class="w-full p-2 text-lg rounded-md border">
+        <div class="buttons flex flex-col sm:flex-row justify-between sm:gap-4 mt-4">
+            <select id="level-selector" onchange="loadLevel()" class="w-full sm:w-auto p-2 text-lg rounded-md border mb-4 sm:mb-0">
                 <option value="1">Level 1 (a, i, u, e, o)</option>
                 <option value="2">Level 2 (ka, ki, ku, ke, ko)</option>
                 <option value="3">Level 3 (sa, shi, su, se, so)</option>
@@ -40,9 +40,9 @@
                 <option value="8">Level 8 (ya, yu, yo, ra, ri)</option>
                 <option value="9">Level 9 (ru, re, ro, wa, wo)</option>
             </select>
-            <button onclick="openPopup()" class="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Reference</button>
-            <button onclick="endQuiz()" class="p-2 bg-red-500 text-white rounded-md hover:bg-red-600">End Quiz</button>
-            <button id="mute-button" onclick="disableReadOut()" class="p-2 bg-green-500 text-white rounded-md hover:bg-green-600">Unmute</button>
+            <button onclick="openPopup()" class="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 mb-4 sm:mb-0">Reference</button>
+            <button onclick="endQuiz()" class="p-2 bg-red-500 text-white rounded-md hover:bg-red-600 mb-4 sm:mb-0">End Quiz</button>
+            <button id="mute-button" onclick="disableReadOut()" class="p-2 bg-green-500 text-white rounded-md hover:bg-green-600 mb-4 sm:mb-0">Unmute</button>
         </div>
     </div>
 
@@ -51,7 +51,6 @@
         <div class="popup-content bg-white p-6 rounded-lg max-w-3xl w-full overflow-auto">
             <h2 class="text-xl font-semibold mb-4 text-center">Hiragana Chart</h2>
             <table class="table-auto w-full mb-4 text-center">
-                <!-- Rows for Hiragana characters -->
                 <tr>
                     <td class="p-4">あ<br><div class="romaji">a</div></td>
                     <td class="p-4">い<br><div class="romaji">i</div></td>
