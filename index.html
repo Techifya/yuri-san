@@ -47,78 +47,82 @@
     </div>
 
     <!-- Hiragana Chart Popup -->
-    <div class="popup fixed inset-0 bg-gray-700 bg-opacity-50 hidden justify-center items-center" id="popup">
-        <div class="popup-content bg-white p-6 rounded-lg max-w-3xl w-full overflow-auto">
-            <h2 class="text-xl font-semibold mb-4 text-center">Hiragana Chart</h2>
-            <table class="table-auto w-full mb-4 text-center">
-                <tr>
-                    <td class="p-4">あ<br><div class="romaji">a</div></td>
-                    <td class="p-4">い<br><div class="romaji">i</div></td>
-                    <td class="p-4">う<br><div class="romaji">u</div></td>
-                    <td class="p-4">え<br><div class="romaji">e</div></td>
-                    <td class="p-4">お<br><div class="romaji">o</div></td>
-                </tr>
-                <tr>
-                    <td class="p-4">か<br><div class="romaji">ka</div></td>
-                    <td class="p-4">き<br><div class="romaji">ki</div></td>
-                    <td class="p-4">く<br><div class="romaji">ku</div></td>
-                    <td class="p-4">け<br><div class="romaji">ke</div></td>
-                    <td class="p-4">こ<br><div class="romaji">ko</div></td>
-                </tr>
-                <tr>
-                    <td class="p-4">さ<br><div class="romaji">sa</div></td>
-                    <td class="p-4">し<br><div class="romaji">shi</div></td>
-                    <td class="p-4">す<br><div class="romaji">su</div></td>
-                    <td class="p-4">せ<br><div class="romaji">se</div></td>
-                    <td class="p-4">そ<br><div class="romaji">so</div></td>
-                </tr>
-                <tr>
-                    <td class="p-4">た<br><div class="romaji">ta</div></td>
-                    <td class="p-4">ち<br><div class="romaji">chi</div></td>
-                    <td class="p-4">つ<br><div class="romaji">tsu</div></td>
-                    <td class="p-4">て<br><div class="romaji">te</div></td>
-                    <td class="p-4">と<br><div class="romaji">to</div></td>
-                </tr>
-                <tr>
-                    <td class="p-4">な<br><div class="romaji">na</div></td>
-                    <td class="p-4">に<br><div class="romaji">ni</div></td>
-                    <td class="p-4">ぬ<br><div class="romaji">nu</div></td>
-                    <td class="p-4">ね<br><div class="romaji">ne</div></td>
-                    <td class="p-4">の<br><div class="romaji">no</div></td>
-                </tr>
-                <tr>
-                    <td class="p-4">は<br><div class="romaji">ha</div></td>
-                    <td class="p-4">ひ<br><div class="romaji">hi</div></td>
-                    <td class="p-4">ふ<br><div class="romaji">fu</div></td>
-                    <td class="p-4">へ<br><div class="romaji">he</div></td>
-                    <td class="p-4">ほ<br><div class="romaji">ho</div></td>
-                </tr>
-                <tr>
-                    <td class="p-4">ま<br><div class="romaji">ma</div></td>
-                    <td class="p-4">み<br><div class="romaji">mi</div></td>
-                    <td class="p-4">む<br><div class="romaji">mu</div></td>
-                    <td class="p-4">め<br><div class="romaji">me</div></td>
-                    <td class="p-4">も<br><div class="romaji">mo</div></td>
-                </tr>
-                <tr>
-                    <td class="p-4">や<br><div class="romaji">ya</div></td>
-                    <td class="p-4">ゆ<br><div class="romaji">yu</div></td>
-                    <td class="p-4">よ<br><div class="romaji">yo</div></td>
-                    <td class="p-4">わ<br><div class="romaji">wa</div></td>
-                    <td class="p-4">を<br><div class="romaji">wo</div></td>
-                </tr>
-                <tr>
-                    <td class="p-4">ら<br><div class="romaji">ra</div></td>
-                    <td class="p-4">り<br><div class="romaji">ri</div></td>
-                    <td class="p-4">る<br><div class="romaji">ru</div></td>
-                    <td class="p-4">れ<br><div class="romaji">re</div></td>
-                    <td class="p-4">ろ<br><div class="romaji">ro</div></td>
-                </tr>
-            </table>
+<!-- Hiragana Chart Popup -->
+<div class="popup fixed inset-0 bg-gray-700 bg-opacity-50 hidden justify-center items-center" id="popup">
+    <div class="popup-content bg-white p-6 rounded-lg w-full max-w-3xl overflow-auto">
+        <h2 class="text-xl font-semibold mb-4 text-center">Hiragana Chart</h2>
+        
+        <table class="table-auto w-full mb-4 text-center border-collapse">
+            <!-- Rows for Hiragana characters -->
+            <tr>
+                <td class="p-4 border border-gray-300">あ<br><div class="romaji">a</div></td>
+                <td class="p-4 border border-gray-300">い<br><div class="romaji">i</div></td>
+                <td class="p-4 border border-gray-300">う<br><div class="romaji">u</div></td>
+                <td class="p-4 border border-gray-300">え<br><div class="romaji">e</div></td>
+                <td class="p-4 border border-gray-300">お<br><div class="romaji">o</div></td>
+            </tr>
+            <tr>
+                <td class="p-4 border border-gray-300">か<br><div class="romaji">ka</div></td>
+                <td class="p-4 border border-gray-300">き<br><div class="romaji">ki</div></td>
+                <td class="p-4 border border-gray-300">く<br><div class="romaji">ku</div></td>
+                <td class="p-4 border border-gray-300">け<br><div class="romaji">ke</div></td>
+                <td class="p-4 border border-gray-300">こ<br><div class="romaji">ko</div></td>
+            </tr>
+            <tr>
+                <td class="p-4 border border-gray-300">さ<br><div class="romaji">sa</div></td>
+                <td class="p-4 border border-gray-300">し<br><div class="romaji">shi</div></td>
+                <td class="p-4 border border-gray-300">す<br><div class="romaji">su</div></td>
+                <td class="p-4 border border-gray-300">せ<br><div class="romaji">se</div></td>
+                <td class="p-4 border border-gray-300">そ<br><div class="romaji">so</div></td>
+            </tr>
+            <tr>
+                <td class="p-4 border border-gray-300">た<br><div class="romaji">ta</div></td>
+                <td class="p-4 border border-gray-300">ち<br><div class="romaji">chi</div></td>
+                <td class="p-4 border border-gray-300">つ<br><div class="romaji">tsu</div></td>
+                <td class="p-4 border border-gray-300">て<br><div class="romaji">te</div></td>
+                <td class="p-4 border border-gray-300">と<br><div class="romaji">to</div></td>
+            </tr>
+            <tr>
+                <td class="p-4 border border-gray-300">な<br><div class="romaji">na</div></td>
+                <td class="p-4 border border-gray-300">に<br><div class="romaji">ni</div></td>
+                <td class="p-4 border border-gray-300">ぬ<br><div class="romaji">nu</div></td>
+                <td class="p-4 border border-gray-300">ね<br><div class="romaji">ne</div></td>
+                <td class="p-4 border border-gray-300">の<br><div class="romaji">no</div></td>
+            </tr>
+            <tr>
+                <td class="p-4 border border-gray-300">は<br><div class="romaji">ha</div></td>
+                <td class="p-4 border border-gray-300">ひ<br><div class="romaji">hi</div></td>
+                <td class="p-4 border border-gray-300">ふ<br><div class="romaji">fu</div></td>
+                <td class="p-4 border border-gray-300">へ<br><div class="romaji">he</div></td>
+                <td class="p-4 border border-gray-300">ほ<br><div class="romaji">ho</div></td>
+            </tr>
+            <tr>
+                <td class="p-4 border border-gray-300">ま<br><div class="romaji">ma</div></td>
+                <td class="p-4 border border-gray-300">み<br><div class="romaji">mi</div></td>
+                <td class="p-4 border border-gray-300">む<br><div class="romaji">mu</div></td>
+                <td class="p-4 border border-gray-300">め<br><div class="romaji">me</div></td>
+                <td class="p-4 border border-gray-300">も<br><div class="romaji">mo</div></td>
+            </tr>
+            <tr>
+                <td class="p-4 border border-gray-300">や<br><div class="romaji">ya</div></td>
+                <td class="p-4 border border-gray-300">ゆ<br><div class="romaji">yu</div></td>
+                <td class="p-4 border border-gray-300">よ<br><div class="romaji">yo</div></td>
+                <td class="p-4 border border-gray-300">わ<br><div class="romaji">wa</div></td>
+                <td class="p-4 border border-gray-300">を<br><div class="romaji">wo</div></td>
+            </tr>
+            <tr>
+                <td class="p-4 border border-gray-300">ら<br><div class="romaji">ra</div></td>
+                <td class="p-4 border border-gray-300">り<br><div class="romaji">ri</div></td>
+                <td class="p-4 border border-gray-300">る<br><div class="romaji">ru</div></td>
+                <td class="p-4 border border-gray-300">れ<br><div class="romaji">re</div></td>
+                <td class="p-4 border border-gray-300">ろ<br><div class="romaji">ro</div></td>
+            </tr>
+        </table>
 
-            <button onclick="closePopup()" class="p-2 bg-red-500 text-white rounded-md hover:bg-red-600 w-full">Close</button>
-        </div>
+        <button onclick="closePopup()" class="p-2 bg-red-500 text-white rounded-md hover:bg-red-600 w-full">Close</button>
     </div>
+</div>
+
 
     <script src="script.js"></script>
 </body>
