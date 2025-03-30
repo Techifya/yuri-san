@@ -81,15 +81,46 @@ let incorrectAnswers = 0;
 let isMuted = true; 
 let lastQuestion = "";
 
+let quizState = {
+    isQuizEnded: false,
+    currentQuestionIndex: 0,
+    correctAnswers: 0,
+    incorrectAnswers: 0,
+    totalQuestions: 0,
+};
+
 
 let flipped = true; // Set the flipped variable (can toggle on/off as needed)
 
 // Function to load questions based on the selected level
 function loadLevel() {
+    // Get the level selector value
     const levelSelector = document.getElementById("level-selector");
-    currentLevel = parseInt(levelSelector.value);  // Get the selected level (1-9)
+    const selectedLevel = parseInt(levelSelector.value);  // Get the selected level
 
-    loadQuestion();  // Load the new question based on the selected level
+    // Update currentLevel with the selected level
+    currentLevel = selectedLevel;
+
+    // If the quiz is ended, we don't want to reset the entire state
+    if (!quizState.isQuizEnded) {
+        loadQuestion();  // Load the question based on the new level
+
+        const choices = document.querySelectorAll(".choice");
+        choices.forEach(choice => choice.style.display = "block"); 
+        document.querySelector("button[onclick='endQuiz()']").disabled = false;
+         // Ensure options are visible again
+    } else {
+        // Restart the quiz without resetting correct and incorrect answers
+        quizState.isQuizEnded = false;  // Set the quiz state back to active
+        quizState.currentQuestionIndex = 0;
+        quizState.correctAnswers = 0;
+        quizState.incorrectAnswers = 0;
+        quizState.totalQuestions = 0;
+
+        // Clear the result and restart the quiz
+        document.getElementById("result").innerText = '';
+        loadQuestion();  // Load the first question of the new level
+    }
 }
 
 function loadQuestion() {
@@ -143,12 +174,12 @@ function checkAnswer(event) {
     }
 
     if (selectedAnswer === correctAnswer) {
-        correctAnswers++;
+        quizState.correctAnswers++;
         result.innerText = "Correct!";
         result.classList.remove("text-red-500");
         result.classList.add("text-green-500");  // Change text color to green for correct answer
     } else {
-        incorrectAnswers++;
+        quizState.incorrectAnswers++;
         result.innerText = `Uh Uh, Incorrect! Answer is ${correctAnswer}`;
         result.classList.remove("text-green-500");
         result.classList.add("text-red-500");  // Change text color to red for incorrect answer
@@ -220,6 +251,38 @@ function readOutCharacter(event) {
     window.speechSynthesis.speak(utterance); // Speak the Hiragana character
 }
 
+function endQuiz() {
+    quizState.isQuizEnded = true;  // Set the quiz as ended
+    const result = document.getElementById("result");
+
+    quizState.totalQuestions = quizState.correctAnswers + quizState.incorrectAnswers; // Total number of attempts
+    const percentage = quizState.totalQuestions > 0 ? (quizState.correctAnswers / quizState.totalQuestions) * 100 : 0;
+
+    // Display the score with correct and incorrect answers
+    result.innerText = `Quiz Ended! You got ${quizState.correctAnswers} correct and ${quizState.incorrectAnswers} incorrect.`;
+
+    // Replace Hiragana symbol with the score
+    document.getElementById("hiragana-symbol").innerText = `${percentage.toFixed(2)}% Accuracy`;
+
+    // Hide the choices to prevent further interaction
+    const choices = document.querySelectorAll(".choice");
+    choices.forEach(choice => choice.style.display = "none");
+
+    // Disable the End Quiz button
+    document.querySelector("button[onclick='endQuiz()']").disabled = true;
+
+    // Clear any result and reset the game state if the user selects a new level
+    quizState.correctAnswers = 0;
+    quizState.incorrectAnswers = 0;
+    quizState.totalQuestions = 0;
+
+    // Ensure choices and result are visible after ending the quiz
+    choices.forEach(choice => choice.style.display = "block");  // Ensure options are visible again
+    result.innerText = '';  // Clear result message
+
+    // Reload the first question of the selected level after the quiz is ended
+    loadQuestion();  // Load a question again after the quiz ends
+}
 
 
 
@@ -234,15 +297,14 @@ function closePopup() {
 }
 
 function endQuiz() {
-    isQuizEnded = true;  // Set the quiz as ended
-
+    quizState.isQuizEnded = true;  // Set the quiz as ended
     const result = document.getElementById("result");
 
-    const totalQuestions = correctAnswers + incorrectAnswers; // Total number of attempts
-    const percentage = totalQuestions > 0 ? (correctAnswers / totalQuestions) * 100 : 0;
+    quizState.totalQuestions = quizState.correctAnswers + quizState.incorrectAnswers; // Total number of attempts
+    const percentage = quizState.totalQuestions > 0 ? (quizState.correctAnswers / quizState.totalQuestions) * 100 : 0;
 
     // Display the score with correct and incorrect answers
-    result.innerText = `Quiz Ended! You got ${correctAnswers} correct and ${incorrectAnswers} incorrect.`;
+    result.innerText = `Quiz Ended! You got ${quizState.correctAnswers} correct and ${quizState.incorrectAnswers} incorrect.`;
 
     // Replace Hiragana symbol with the score
     document.getElementById("hiragana-symbol").innerText = `${percentage.toFixed(2)}% Accuracy`;
@@ -254,8 +316,8 @@ function endQuiz() {
     // Disable the End Quiz button
     document.querySelector("button[onclick='endQuiz()']").disabled = true;
 
-    // Show the Start Quiz button again (if needed)
-    document.getElementById("start-quiz-btn").style.display = 'block'; // Optionally add a restart button
+    // Optionally, show a restart button to start the quiz again
+    document.getElementById("start-quiz-btn").style.display = 'block'; // Show the restart button
 }
 
 function addCharacterReadEvents() {
@@ -297,4 +359,7 @@ function disableReadOut() {
         document.getElementById("mute-button").innerText = "Mute";  // Change button text to "Mute"
     }
 }
+
+document.getElementById("level-selector").addEventListener("change", loadLevel);
+
 loadQuestion();
