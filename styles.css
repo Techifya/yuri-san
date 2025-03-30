@@ -200,3 +200,42 @@ button:hover {
         margin: 5px;
     }
 }
+
+/* Style the level selector */
+#level-selector {
+    padding: 10px;
+    font-size: 1.2rem;
+    border: 2px solid #4CAF50; /* Green border */
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    width: 100%;  /* Adjust width to fit the text */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* On hover, change the background color */
+#level-selector:hover {
+    background-color: #f1f1f1;
+}
+
+/* On focus, change the border color */
+#level-selector:focus {
+    outline: none;  /* Remove default outline */
+    border-color: #45a049;  /* Darker green border */
+}
+
+/* Add a custom arrow style for the select dropdown */
+#level-selector::-ms-expand {
+    display: none; /* Hide default dropdown arrow for IE */
+}
+
+#level-selector {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 6"%3E%3Cpath d="M1 1l4 4 4-4" stroke="%23444444" stroke-width="2" fill="none" /%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+}

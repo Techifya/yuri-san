@@ -19,90 +19,109 @@
             <div class="choice" onclick="checkAnswer(event)" data-answer="i" data-character="い">i</div>
             <div class="choice" onclick="checkAnswer(event)" data-answer="u" data-character="う">u</div>
             <div class="choice" onclick="checkAnswer(event)" data-answer="e" data-character="え">e</div>
+            <div class="choice" onclick="checkAnswer(event)" data-answer="o" data-character="え">e</div>
         </div>
         
 
         <div class="result" id="result"></div>
 
         <div class="buttons">
+            <select id="level-selector" onchange="loadLevel()" style="align-items: center;">
+                <option value="1">Level 1 (a, i, u, e, o)</option>
+                <option value="2">Level 2 (ka, ki, ku, ke, ko)</option>
+                <option value="3">Level 3 (sa, shi, su, se, so)</option>
+                <option value="4">Level 4 (ta, chi, tsu, te, to)</option>
+                <option value="5">Level 5 (na, ni, nu, ne, no)</option>
+                <option value="6">Level 6 (ha, hi, fu, he, ho)</option>
+                <option value="7">Level 7 (ma, mi, mu, me, mo)</option>
+                <option value="8">Level 8 (ya, yu, yo, ra, ri)</option>
+                <option value="9">Level 9 (ru, re, ro, wa, wo)</option>
+            </select>
             <button onclick="openPopup()">Hiragana Reference</button>
             <button onclick="endQuiz()">End Quiz</button>
+            <!-- Mute Button -->
+            <button id="mute-button" onclick="disableReadOut()">Unmute</button>
         </div>
+
 
         <!-- Hiragana Chart Popup -->
 <!-- Hiragana Chart Popup -->
-<div class="popup" id="popup">
-    <div class="popup-content">
-        <h2>Hiragana Chart</h2>
-        <table>
-            <!-- Rows for Hiragana characters -->
-            <tr>
-                <td><span class="hiragana-symbol">あ</span><div class="romaji">a</div></td>
-                <td><span class="hiragana-symbol">い</span><div class="romaji">i</div></td>
-                <td><span class="hiragana-symbol">う</span><div class="romaji">u</div></td>
-                <td><span class="hiragana-symbol">え</span><div class="romaji">e</div></td>
-                <td><span class="hiragana-symbol">お</span><div class="romaji">o</div></td>
-            </tr>
-            <tr>
-                <td><span class="hiragana-symbol">か</span><div class="romaji">ka</div></td>
-                <td><span class="hiragana-symbol">き</span><div class="romaji">ki</div></td>
-                <td><span class="hiragana-symbol">く</span><div class="romaji">ku</div></td>
-                <td><span class="hiragana-symbol">け</span><div class="romaji">ke</div></td>
-                <td><span class="hiragana-symbol">こ</span><div class="romaji">ko</div></td>
-            </tr>
-            <tr>
-                <td><span class="hiragana-symbol">さ</span><div class="romaji">sa</div></td>
-                <td><span class="hiragana-symbol">し</span><div class="romaji">shi</div></td>
-                <td><span class="hiragana-symbol">す</span><div class="romaji">su</div></td>
-                <td><span class="hiragana-symbol">せ</span><div class="romaji">se</div></td>
-                <td><span class="hiragana-symbol">そ</span><div class="romaji">so</div></td>
-            </tr>
-            <tr>
-                <td><span class="hiragana-symbol">た</span><div class="romaji">ta</div></td>
-                <td><span class="hiragana-symbol">ち</span><div class="romaji">chi</div></td>
-                <td><span class="hiragana-symbol">つ</span><div class="romaji">tsu</div></td>
-                <td><span class="hiragana-symbol">て</span><div class="romaji">te</div></td>
-                <td><span class="hiragana-symbol">と</span><div class="romaji">to</div></td>
-            </tr>
-            <tr>
-                <td><span class="hiragana-symbol">な</span><div class="romaji">na</div></td>
-                <td><span class="hiragana-symbol">に</span><div class="romaji">ni</div></td>
-                <td><span class="hiragana-symbol">ぬ</span><div class="romaji">nu</div></td>
-                <td><span class="hiragana-symbol">ね</span><div class="romaji">ne</div></td>
-                <td><span class="hiragana-symbol">の</span><div class="romaji">no</div></td>
-            </tr>
-            <tr>
-                <td><span class="hiragana-symbol">は</span><div class="romaji">ha</div></td>
-                <td><span class="hiragana-symbol">ひ</span><div class="romaji">hi</div></td>
-                <td><span class="hiragana-symbol">ふ</span><div class="romaji">fu</div></td>
-                <td><span class="hiragana-symbol">へ</span><div class="romaji">he</div></td>
-                <td><span class="hiragana-symbol">ほ</span><div class="romaji">ho</div></td>
-            </tr>
-            <tr>
-                <td><span class="hiragana-symbol">ま</span><div class="romaji">ma</div></td>
-                <td><span class="hiragana-symbol">み</span><div class="romaji">mi</div></td>
-                <td><span class="hiragana-symbol">む</span><div class="romaji">mu</div></td>
-                <td><span class="hiragana-symbol">め</span><div class="romaji">me</div></td>
-                <td><span class="hiragana-symbol">も</span><div class="romaji">mo</div></td>
-            </tr>
-            <tr>
-                <td><span class="hiragana-symbol">や</span><div class="romaji">ya</div></td>
-                <td><span class="hiragana-symbol">ゆ</span><div class="romaji">yu</div></td>
-                <td><span class="hiragana-symbol">よ</span><div class="romaji">yo</div></td>
-                <td><span class="hiragana-symbol">ら</span><div class="romaji">ra</div></td>
-                <td><span class="hiragana-symbol">り</span><div class="romaji">ri</div></td>
-            </tr>
-            <tr>
-                <td><span class="hiragana-symbol">る</span><div class="romaji">ru</div></td>
-                <td><span class="hiragana-symbol">れ</span><div class="romaji">re</div></td>
-                <td><span class="hiragana-symbol">ろ</span><div class="romaji">ro</div></td>
-                <td><span class="hiragana-symbol">わ</span><div class="romaji">wa</div></td>
-                <td><span class="hiragana-symbol">を</span><div class="romaji">wo</div></td>
-            </tr>
-        </table>
-        <button onclick="closePopup()">Close</button>
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <h2>Hiragana Chart</h2>
+            <table>
+                <!-- Rows for Hiragana characters -->
+                <tr>
+                    <td><span class="hiragana-symbol">あ</span><div class="romaji">a</div></td>
+                    <td><span class="hiragana-symbol">い</span><div class="romaji">i</div></td>
+                    <td><span class="hiragana-symbol">う</span><div class="romaji">u</div></td>
+                    <td><span class="hiragana-symbol">え</span><div class="romaji">e</div></td>
+                    <td><span class="hiragana-symbol">お</span><div class="romaji">o</div></td>
+                </tr>
+                <tr>
+                    <td><span class="hiragana-symbol">か</span><div class="romaji">ka</div></td>
+                    <td><span class="hiragana-symbol">き</span><div class="romaji">ki</div></td>
+                    <td><span class="hiragana-symbol">く</span><div class="romaji">ku</div></td>
+                    <td><span class="hiragana-symbol">け</span><div class="romaji">ke</div></td>
+                    <td><span class="hiragana-symbol">こ</span><div class="romaji">ko</div></td>
+                </tr>
+                <tr>
+                    <td><span class="hiragana-symbol">さ</span><div class="romaji">sa</div></td>
+                    <td><span class="hiragana-symbol">し</span><div class="romaji">shi</div></td>
+                    <td><span class="hiragana-symbol">す</span><div class="romaji">su</div></td>
+                    <td><span class="hiragana-symbol">せ</span><div class="romaji">se</div></td>
+                    <td><span class="hiragana-symbol">そ</span><div class="romaji">so</div></td>
+                </tr>
+                <tr>
+                    <td><span class="hiragana-symbol">た</span><div class="romaji">ta</div></td>
+                    <td><span class="hiragana-symbol">ち</span><div class="romaji">chi</div></td>
+                    <td><span class="hiragana-symbol">つ</span><div class="romaji">tsu</div></td>
+                    <td><span class="hiragana-symbol">て</span><div class="romaji">te</div></td>
+                    <td><span class="hiragana-symbol">と</span><div class="romaji">to</div></td>
+                </tr>
+                <tr>
+                    <td><span class="hiragana-symbol">な</span><div class="romaji">na</div></td>
+                    <td><span class="hiragana-symbol">に</span><div class="romaji">ni</div></td>
+                    <td><span class="hiragana-symbol">ぬ</span><div class="romaji">nu</div></td>
+                    <td><span class="hiragana-symbol">ね</span><div class="romaji">ne</div></td>
+                    <td><span class="hiragana-symbol">の</span><div class="romaji">no</div></td>
+                </tr>
+                <tr>
+                    <td><span class="hiragana-symbol">は</span><div class="romaji">ha</div></td>
+                    <td><span class="hiragana-symbol">ひ</span><div class="romaji">hi</div></td>
+                    <td><span class="hiragana-symbol">ふ</span><div class="romaji">fu</div></td>
+                    <td><span class="hiragana-symbol">へ</span><div class="romaji">he</div></td>
+                    <td><span class="hiragana-symbol">ほ</span><div class="romaji">ho</div></td>
+                </tr>
+                <tr>
+                    <td><span class="hiragana-symbol">ま</span><div class="romaji">ma</div></td>
+                    <td><span class="hiragana-symbol">み</span><div class="romaji">mi</div></td>
+                    <td><span class="hiragana-symbol">む</span><div class="romaji">mu</div></td>
+                    <td><span class="hiragana-symbol">め</span><div class="romaji">me</div></td>
+                    <td><span class="hiragana-symbol">も</span><div class="romaji">mo</div></td>
+                </tr>
+                <tr>
+                    <td><span class="hiragana-symbol">や</span><div class="romaji">ya</div></td>
+                    <td><span class="hiragana-symbol">ゆ</span><div class="romaji">yu</div></td>
+                    <td><span class="hiragana-symbol">よ</span><div class="romaji">yo</div></td>
+                    <td><span class="hiragana-symbol">わ</span><div class="romaji">wa</div></td>
+                    <td><span class="hiragana-symbol">を</span><div class="romaji">wo</div></td>
+                </tr>
+                <tr>
+                    <td><span class="hiragana-symbol">ら</span><div class="romaji">ra</div></td>
+                    <td><span class="hiragana-symbol">り</span><div class="romaji">ri</div></td>
+                    <td><span class="hiragana-symbol">る</span><div class="romaji">ru</div></td>
+                    <td><span class="hiragana-symbol">れ</span><div class="romaji">re</div></td>
+                    <td><span class="hiragana-symbol">ろ</span><div class="romaji">ro</div></td>
+                </tr>
+            </table>
+            
+            <button onclick="closePopup()">Close</button>
+        </div>
     </div>
-</div>
+    <!-- Level Selector -->
+
+
 
 
     <script src="script.js"></script>
