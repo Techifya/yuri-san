@@ -27,7 +27,7 @@ body {
 }
 
 #hiragana-symbol {
-    font-size: 4rem;
+    font-size: x-large;
     margin-top: 20px;
     padding: 20px;
     background-color: #e0e0e0;
@@ -37,7 +37,7 @@ body {
 /* Choices Section */
 .choices {
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Center the choices */
     margin-top: 30px;
     flex-wrap: wrap;  /* Allow wrapping on smaller screens */
 }
@@ -47,11 +47,12 @@ body {
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 15px 30px;
-    font-size: 1.5rem;
+    font-size: xx-large;
     cursor: pointer;
     transition: background-color 0.3s;
-    flex: 1 1 45%;  /* Allow two choices per row on mobile */
+    flex: 1 1 20%;  /* Allow choices to be in a row, and each take 20% of the container width */
     margin: 5px;  /* Add spacing between choices */
+    text-align: center;
 }
 
 .choice:hover {
@@ -149,8 +150,6 @@ button:hover {
 }
 
 /* Button */
-
-
 .popup-content button {
     margin-top: 20px;
     background-color: #f44336;
@@ -169,8 +168,9 @@ button:hover {
     }
 
     .choice {
-        font-size: 1.2rem; /* Adjust choice font size */
+        font-size: xx-large; /* Adjust choice font size */
         padding: 12px 20px; /* Adjust padding for better fit */
+        flex: 1 1 45%; /* Take up more space on mobile for better readability */
     }
 
     .buttons {
@@ -195,7 +195,7 @@ button:hover {
     }
 
     .choice {
-        font-size: 1.2rem;
+        font-size: xx-large;
         padding: 10px 20px;
         margin: 5px;
     }
@@ -213,7 +213,6 @@ button:hover {
     width: 100%;  /* Adjust width to fit the text */
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
-
 
 /* Flip Button effect */
 /* Flip container */

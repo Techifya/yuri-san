@@ -79,15 +79,10 @@ let currentQuestionIndex = 0;
 let correctAnswers = 0;  // Track correct answers
 let incorrectAnswers = 0;
 let isMuted = true; 
+let lastQuestion = "";
 
 
 let flipped = true; // Set the flipped variable (can toggle on/off as needed)
-
-// Function to toggle the flipped state
-function toggleFlip() {
-    flipped = !flipped;  // Toggle the value of flipped
-    loadQuestion();  // Reload the question based on the new flipped state
-}
 
 // Function to load questions based on the selected level
 function loadLevel() {
@@ -102,42 +97,71 @@ function loadQuestion() {
     const levelHiragana = hiraganaLevels[currentLevel - 1];
 
     // Randomly select a Hiragana symbol from the current level's row
-    const randomHiragana = levelHiragana[Math.floor(Math.random() * levelHiragana.length)];
+    let randomHiragana;
+
+    // Ensure the random Hiragana is not the same as the previous one
+    do {
+        randomHiragana = levelHiragana[Math.floor(Math.random() * levelHiragana.length)];
+    } while (randomHiragana === lastQuestion);  // Check if it matches the last question
+
+    lastQuestion = randomHiragana;  // Store the new question as the last one
 
     // Randomize the Romaji choices for the selected level
     const randomChoices = getRandomRomajiOptions(levelHiragana);
 
     const choices = document.querySelectorAll(".choice");
 
-    if (flipped) {
-        // If flipped is true, display the question in Romaji and options in Hiragana
-        const romaji = hiraganaRomaji[randomHiragana];  // Get the Romaji for the randomly selected Hiragana symbol
-        document.getElementById("hiragana-symbol").innerText = romaji;  // Show the Romaji as the question
+    // Show the question in Romaji (always)
+    const romaji = hiraganaRomaji[randomHiragana];  // Get the Romaji for the randomly selected Hiragana symbol
+    document.getElementById("hiragana-symbol").innerText = romaji;  // Show the Romaji as the question
 
-        // Update the choices with Hiragana answers
-        choices.forEach((choice, index) => {
-            choice.innerText = levelHiragana[index];  // Display the corresponding Hiragana for each choice
-            choice.setAttribute("data-answer", hiraganaRomaji[levelHiragana[index]]); // Store the corresponding Romaji in data-answer
-            choice.setAttribute("data-character", levelHiragana[index]); // Store the Hiragana character in data-character
-        });
-    } else {
-        // If flipped is false, show the Hiragana symbol and Romaji options
-        document.getElementById("hiragana-symbol").innerText = randomHiragana;  // Update the Hiragana symbol displayed
-
-        // Update the choices with randomized Romaji answers and the correct Hiragana character
-        choices.forEach((choice, index) => {
-            const hiraganaCharacter = levelHiragana[index];  // Get the Hiragana character
-            const romaji = hiraganaRomaji[hiraganaCharacter];  // Get the Romaji for the Hiragana
-
-            choice.innerText = romaji;  // Display the randomized Romaji
-            choice.setAttribute("data-answer", romaji); // Store Romaji in data-answer
-            choice.setAttribute("data-character", hiraganaCharacter); // Store Hiragana character in data-character
-        });
-    }
+    // Update the choices with Hiragana answers (for non-flipped mode)
+    choices.forEach((choice, index) => {
+        choice.innerText = levelHiragana[index];  // Display the corresponding Hiragana for each choice
+        choice.setAttribute("data-answer", levelHiragana[index]); // Store the Hiragana in data-answer
+        choice.setAttribute("data-character", hiraganaRomaji[levelHiragana[index]]); // Store the Romaji character in data-character
+    });
 
     // Add the hover and touch events
     addCharacterReadEvents();
 }
+
+function checkAnswer(event) {
+    const selectedAnswer = event.target.getAttribute("data-answer"); // Get the selected answer (Hiragana)
+    const hiraganaSymbol = document.getElementById("hiragana-symbol").innerText;  // Get the current Romaji question displayed
+    const result = document.getElementById("result");
+
+    // We need to get the corresponding Hiragana symbol for the current Romaji question
+    let correctAnswer = '';
+
+    // Get the correct Hiragana based on the Romaji question
+    for (const question of questions) {
+        if (hiraganaRomaji[question.hiragana] === hiraganaSymbol) {
+            correctAnswer = question.hiragana;  // Get the Hiragana symbol that corresponds to the displayed Romaji
+            break;
+        }
+    }
+
+    if (selectedAnswer === correctAnswer) {
+        correctAnswers++;
+        result.innerText = "Correct!";
+        result.classList.remove("text-red-500");
+        result.classList.add("text-green-500");  // Change text color to green for correct answer
+    } else {
+        incorrectAnswers++;
+        result.innerText = `Uh Uh, Incorrect! Answer is ${correctAnswer}`;
+        result.classList.remove("text-green-500");
+        result.classList.add("text-red-500");  // Change text color to red for incorrect answer
+    }
+
+    // Hide the result message and load the next question after a short delay
+    setTimeout(() => {
+        result.innerText = ""; // Clear the result message
+        loadQuestion(); // Load the next question
+    }, 2000); // Adjust the delay time as needed
+}
+
+
 
 
 
@@ -196,39 +220,7 @@ function readOutCharacter(event) {
     window.speechSynthesis.speak(utterance); // Speak the Hiragana character
 }
 
-function checkAnswer(event) {
-    const selectedAnswer = event.target.getAttribute("data-answer");  // Get the selected answer (either Romaji or Hiragana)
-    const hiraganaSymbol = document.getElementById("hiragana-symbol").innerText;  // Get the current Hiragana symbol displayed
-    const result = document.getElementById("result");
 
-    if (flipped) {
-        // In flipped mode, compare Romaji with the corresponding Hiragana
-        const correctAnswer = hiraganaSymbol;  // Correct answer is the Hiragana symbol displayed
-        if (selectedAnswer === correctAnswer) {
-            correctAnswers++;
-            result.innerText = "Correct!";
-        } else {
-            incorrectAnswers++;
-            result.innerText = `Uh Uh, Incorrect! Answer is ${correctAnswer}`;
-        }
-    } else {
-        // In non-flipped mode, compare the selected Romaji with the correct Romaji
-        const correctAnswer = hiraganaRomaji[hiraganaSymbol];  // Get the correct Romaji for the Hiragana symbol
-        if (selectedAnswer === correctAnswer) {
-            correctAnswers++;
-            result.innerText = "Correct!";
-        } else {
-            incorrectAnswers++;
-            result.innerText = `Uh Uh, Incorrect! Answer is ${correctAnswer}`;
-        }
-    }
-
-    // Hide the result message and load the next question after a short delay
-    setTimeout(() => {
-        result.innerText = ""; // Clear the result message
-        loadQuestion();  // Load the next question based on the current flipped state
-    }, 2000);  // Adjust the delay time as needed
-}
 
 
 
