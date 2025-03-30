@@ -146,16 +146,29 @@ function loadQuestion() {
     const romaji = hiraganaRomaji[randomHiragana];  // Get the Romaji for the randomly selected Hiragana symbol
     document.getElementById("hiragana-symbol").innerText = romaji;  // Show the Romaji as the question
 
-    // Update the choices with Hiragana answers (for non-flipped mode)
+    // Shuffle the Hiragana options
+    const shuffledHiragana = shuffle([...levelHiragana]);  // Create a shuffled version of the Hiragana options
+
+    // Update the choices with the shuffled Hiragana answers
     choices.forEach((choice, index) => {
-        choice.innerText = levelHiragana[index];  // Display the corresponding Hiragana for each choice
-        choice.setAttribute("data-answer", levelHiragana[index]); // Store the Hiragana in data-answer
-        choice.setAttribute("data-character", hiraganaRomaji[levelHiragana[index]]); // Store the Romaji character in data-character
+        choice.innerText = shuffledHiragana[index];  // Display the corresponding shuffled Hiragana for each choice
+        choice.setAttribute("data-answer", shuffledHiragana[index]); // Store the shuffled Hiragana in data-answer
+        choice.setAttribute("data-character", hiraganaRomaji[shuffledHiragana[index]]); // Store the Romaji character in data-character
     });
 
     // Add the hover and touch events
     addCharacterReadEvents();
 }
+
+// Shuffle function to randomize the array
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]]; // Shuffle the array
+    }
+    return array;
+}
+
 
 function checkAnswer(event) {
     const selectedAnswer = event.target.getAttribute("data-answer"); // Get the selected answer (Hiragana)
